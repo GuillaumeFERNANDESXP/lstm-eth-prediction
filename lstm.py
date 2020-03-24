@@ -5,11 +5,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# import keras
-# from keras.models import Sequential
-# from keras.layers import Activation, Dense
-# from keras.layers import LSTM
-# from keras.layers import Dropout
+from sklearn.preprocessing import MinMaxScaler
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
+from keras.layers import Dropout
+
+
 
 
 
@@ -53,7 +55,6 @@ print(dataset_train.head(10))
 # A method to preprocess the data in to sequences and to return x and y 
 
 #Initializing the MinMaxScaler object
-from sklearn.preprocessing import MinMaxScaler
 sc = MinMaxScaler(feature_range = (0,1))
 
 def bit_pre_process(raw_data , seq_len, column = 1):
@@ -92,11 +93,6 @@ X_train, y_train = bit_pre_process(dataset_train , sequence_length, comumn_index
 print(X_train.shape)
 print(y_train.shape)
 
-#Importing the Keras libraries and packages
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import LSTM
-from keras.layers import Dropout
 
 #Initialising the RNN
 regressor = Sequential()
@@ -123,8 +119,8 @@ regressor.add(Dense(units = 1))
 #Compiling the RNN
 regressor.compile(optimizer = 'adam', loss = 'mean_squared_error', metrics = ['mse', 'mae', 'mape', 'cosine'])
 
-#Fitting the RNN to the Training set and training the RNN
-regressor.fit(X_train, y_train, epochs = 30, batch_size = 90)
+#Fitting the RNN to the Training set and training the RNN (epochs = 30/ batch_size = 90)
+regressor.fit(X_train, y_train, epochs = 1, batch_size = 1000)
 
 print(dataset_test.head())
 print(dataset_test.shape)
