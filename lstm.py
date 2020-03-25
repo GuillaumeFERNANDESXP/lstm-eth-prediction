@@ -15,7 +15,6 @@ from keras.layers import Dropout
 
 
 
-print("Loading data...")
 print('Print complete data head')
 complete_data = pd.read_csv('export-EtherPrice.csv')
 print(complete_data.head())
